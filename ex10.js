@@ -8,7 +8,15 @@ Create a function named multiplicationTable that receives a number maxValue as i
 */
 
 const multiplicationTable = function (maxValue) {
-  // Your code here
+  let table = [];
+  for (let i = 1; i <= maxValue; i++) {
+    let row = [];
+    for (let j = 1; j <= maxValue; j++) {
+      row.push(i * j);
+    }
+    table.push(row);
+  }
+  return table.map(row => row.join(' ')).join('\n');
 };
 
 console.log(multiplicationTable(1));

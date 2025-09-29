@@ -23,7 +23,30 @@ Penny (1¢)
 */
 
 const calculateChange = function (total, cash) {
-  // Your code here
+  let change = cash - total;
+  const denominations = [
+    { name: 'twentyDollar', value: 2000 },
+    { name: 'tenDollar', value: 1000 },
+    { name: 'fiveDollar', value: 500 },
+    { name: 'twoDollar', value: 200 },
+    { name: 'oneDollar', value: 100 },
+    { name: 'quarter', value: 25 },
+    { name: 'dime', value: 10 },
+    { name: 'nickel', value: 5 },
+    { name: 'penny', value: 1 },
+  ];
+  const calculateRecursive = (change, index, obj) => {
+    if (change === 0 || index >= denominations.length) return obj;
+    const denom = denominations[index];
+    if (change >= denom.value) {
+      const count = parseInt(change / denom.value); 
+      obj[denom.name] = count;
+      change = change % denom.value;
+    }
+    return calculateRecursive(change, index + 1, obj);
+  };
+
+  return calculateRecursive(change, 0, {});
 };
 
 console.log(calculateChange(1787, 2000)); // { twoDollar: 1, dime: 1, penny: 3 }
